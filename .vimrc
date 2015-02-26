@@ -5,7 +5,6 @@ set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
 set fileformat=unix
 set guifont=Courier:h12
 set clipboard=unnamed
-set laststatus=2
 set scrolloff=3
 set list
 set listchars=tab:▸\ ,eol:¬,nbsp:·,trail:·
@@ -22,10 +21,18 @@ set autoindent
 set smartindent
 set nobackup
 set writebackup
-set hlsearch 
 set autoread
+" 高亮显示搜索结果
+set hlsearch 
+" 高亮显示当前行/列
+set cursorline
+"set cursorcolumn
+" 显示行号
 set nu
+" 显示光标当前位置
 set ruler
+" 总是显示状态栏
+set laststatus=2
 " 开启事实搜索
 set incsearch
 " 搜索时大小写不敏感
@@ -34,6 +41,8 @@ set ignorecase
 set nocompatible
 " vim 自身命令行模式智能补全
 set wildmenu
+" 禁止光标闪烁
+set gcr=a:block-blinkon0
 
 
 " pathogen setting
