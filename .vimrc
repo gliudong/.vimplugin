@@ -10,9 +10,9 @@ set list
 set listchars=tab:▸\ ,eol:¬,nbsp:·,trail:·
 set showcmd
 set linespace=4
-set shiftwidth=4
-set tabstop=4
-set softtabstop=4
+set shiftwidth=2
+set tabstop=2
+set softtabstop=2
 set expandtab
 set noswapfile
 set backspace=start,indent,eol
@@ -36,13 +36,16 @@ set laststatus=2
 " 开启事实搜索
 set incsearch
 " 搜索时大小写不敏感
-set ignorecase
+"set ignorecase
 " 关闭兼容模式
 set nocompatible
 " vim 自身命令行模式智能补全
 set wildmenu
 " 禁止光标闪烁
 set gcr=a:block-blinkon0
+
+cnoremap <C-p> <Up>
+cnoremap <C-n> <Down>
 
 
 " pathogen setting
@@ -57,12 +60,40 @@ syntax enable
 
 " vim-javasrcipt setting
 "----------------------------------
-let g:javascript_conceal=0
+"let g:javascript_conceal=0
+
+"powerline setting
+set rtp+=/usr/local/lib/python2.7/dist-packages/powerline/bindings/vim
+
+" These lines setup the environment to show graphics and colors correctly.
+set nocompatible
+set t_Co=256
+ 
+let g:minBufExplForceSyntaxEnable = 1
+python from powerline.vim import setup as powerline_setup
+python powerline_setup()
+python del powerline_setup
+ 
+if ! has('gui_running')
+   set ttimeoutlen=10
+   augroup FastEscape
+      autocmd!
+      au InsertEnter * set timeoutlen=0
+      au InsertLeave * set timeoutlen=1000
+   augroup END
+endif
+ 
+set laststatus=2 " Always display the statusline in all windows
+set guifont=Inconsolata\ for\ Powerline:h14
+set noshowmode " Hide the default mode text (e.g. -- INSERT -- below the statusline)
+
+
+
 
 " airline setting
 " ---------------------------------
-let g:airline_detect_modified=1
-let g:airline_theme='badwolf'
+"let g:airline_detect_modified=1
+"let g:airline_theme='badwolf'
 
 "solarized setting
 "----------------------------------
