@@ -44,8 +44,12 @@ set wildmenu
 " 禁止光标闪烁
 set gcr=a:block-blinkon0
 
+"ex 中上下键搜索
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
+
+" 展开当前文件所在目录
+cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/':'%%'
 
 
 " pathogen setting
