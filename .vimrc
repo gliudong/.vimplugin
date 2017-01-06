@@ -9,14 +9,14 @@ set scrolloff=3
 set list
 set listchars=tab:▸\ ,eol:¬,nbsp:·,trail:·
 set showcmd
-set linespace=4
+set linespace=2
 set shiftwidth=2
 set tabstop=2
 set softtabstop=2
 set expandtab
 set noswapfile
 set backspace=start,indent,eol
-set numberwidth=4
+set numberwidth=2
 set autoindent
 set smartindent
 set nobackup
@@ -44,6 +44,15 @@ set wildmenu
 " 禁止光标闪烁
 set gcr=a:block-blinkon0
 
+" FINDING FILE
+" Search down into subfolders
+" Provides tab-completion for all file-related tasks
+set path+=**
+
+" Display all matching files when we tab complete
+set wildmenu
+
+
 "ex 中上下键搜索
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
@@ -58,51 +67,78 @@ execute pathogen#infect()
 " 开启文件类型侦测
 filetype on
 " 根据侦测到的不同类型加载对应的插件
+syntax enable
 filetype plugin on
 filetype indent on
-syntax enable
+
+" eslint setting
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_loc_list_height = 5
+let g:syntastic_auto_loc_list = 0
+"let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 1
+let g:syntastic_javascript_checkers = ['eslint']
+
+let g:syntastic_error_symbol = '❌'
+let g:syntastic_style_error_symbol = '⁉️'
+let g:syntastic_warning_symbol = '⚠️'
+let g:syntastic_style_warning_symbol = '💩'
+
+highlight link SyntasticErrorSign SignColumn
+highlight link SyntasticWarningSign SignColumn
+highlight link SyntasticStyleErrorSign SignColumn
+highlight link SyntasticStyleWarningSign SignColumn
 
 " vim-javasrcipt setting
 "----------------------------------
 "let g:javascript_conceal=0
+"
+"vim-jsx setting
+"-----------------------------------
+let g:jsx_ext_required=0
 
 "powerline setting
-set rtp+=/usr/local/lib/python2.7/dist-packages/powerline/bindings/vim
+"set rtp+=/usr/local/lib/python2.7/dist-packages/powerline/bindings/vim
+"let g:python_host_prog = '/Library/Python/2.7'
+set rtp+=/Library/Python/2.7/site-packages/powerline/bindings/vim
 
-" These lines setup the environment to show graphics and colors correctly.
-set nocompatible
-set t_Co=256
+
+ "These lines setup the environment to show graphics and colors correctly.
+"set nocompatible
+"set t_Co=256
  
-let g:minBufExplForceSyntaxEnable = 1
-python from powerline.vim import setup as powerline_setup
-python powerline_setup()
-python del powerline_setup
+"let g:minBufExplForceSyntaxEnable = 1
+"python from powerline.vim import setup as powerline_setup
+"python powerline_setup()
+"python del powerline_setup
  
-if ! has('gui_running')
-   set ttimeoutlen=10
-   augroup FastEscape
-      autocmd!
-      au InsertEnter * set timeoutlen=0
-      au InsertLeave * set timeoutlen=1000
-   augroup END
-endif
+"if ! has('gui_running')
+   "set ttimeoutlen=10
+   "augroup FastEscape
+      "autocmd!
+      "au InsertEnter * set timeoutlen=0
+      "au InsertLeave * set timeoutlen=1000
+   "augroup END
+"endif
  
 set laststatus=2 " Always display the statusline in all windows
 set guifont=Inconsolata\ for\ Powerline:h14
 set noshowmode " Hide the default mode text (e.g. -- INSERT -- below the statusline)
 
-
-
-
 " airline setting
 " ---------------------------------
+"let g:airline#extensions#tabline#enabled = 1
 "let g:airline_detect_modified=1
 "let g:airline_theme='badwolf'
 
 "solarized setting
 "----------------------------------
-"set background=dark
-"colorscheme solarized
+set background=light
+colorscheme solarized
 
 " NERDTree setting
 "----------------------------------
