@@ -6,8 +6,8 @@ set fileformat=unix
 set guifont=Courier:h12
 set clipboard=unnamed
 set scrolloff=3
-"set list
-"set listchars=eol:¬,nbsp:·,trail:·
+set list
+set listchars=tab:▸\ ,eol:¬,nbsp:·,trail:·
 set showcmd
 set linespace=2
 set shiftwidth=2
@@ -44,18 +44,6 @@ set wildmenu
 " 禁止光标闪烁
 set gcr=a:block-blinkon0
 
-" FINDING FILE
-" Search down into subfolders
-" Provides tab-completion for all file-related tasks
-set path+=**
-
-" Display all matching files when we tab complete
-set wildmenu
-
-" Create the 'tags' file
-"command! MakeTags !ctags -R .
-
-
 "ex 中上下键搜索
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
@@ -63,14 +51,6 @@ cnoremap <C-n> <Down>
 " 展开当前文件所在目录
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/':'%%'
 
-" set vim wiki
-" ------------------------------------
-let wiki_main = {}
-"let wiki_main.path = '~/AliDrive/documents/'
-let wiki_main.syntax = 'markdown'
-let wiki_main.ext = '.md'
-let wiki_main.index = 'Home'
-let wiki_main.nested_syntaxes = {'python': 'python', 'cpp': 'cpp', 'javscript': 'javascript', 'json': 'json', 'conf': 'conf'}
 
 " pathogen setting
 "----------------------------------
@@ -78,35 +58,31 @@ execute pathogen#infect()
 " 开启文件类型侦测
 filetype on
 " 根据侦测到的不同类型加载对应的插件
-syntax on
 filetype plugin on
 filetype indent on
-
-" Tweaks for browsing
-"let g:netrw_banner=0        " disbale annoying banner
-"let g:netrw_browse_split=4  " open in prior window
-"let g:netrw_altv=1          " open splits to the right
-"let g:netrw_liststyle=3     " tree view
-"let g:netrw_list_hide=netrw_gitignore#Hide()
-"let g:netrw_list_hide.=',\(^\|\s\s\)zs\.\S\+'
-
+syntax enable
 
 " eslint setting
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
 
-"let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_loc_list_height = 5
-"let g:syntastic_auto_loc_list = 0
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_loc_list_height = 5
+let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 1
-"let g:syntastic_check_on_wq = 1
-"let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_check_on_wq = 1
+let g:syntastic_javascript_checkers = ['eslint']
 
-"let g:syntastic_error_symbol = '❌'
-"let g:syntastic_style_error_symbol = '⁉️'
-"let g:syntastic_warning_symbol = '⚠️'
-"let g:syntastic_style_warning_symbol = '💩'
+let g:syntastic_error_symbol = '❌'
+let g:syntastic_style_error_symbol = '⁉️'
+let g:syntastic_warning_symbol = '⚠️'
+let g:syntastic_style_warning_symbol = '💩'
+
+highlight link SyntasticErrorSign SignColumn
+highlight link SyntasticWarningSign SignColumn
+highlight link SyntasticStyleErrorSign SignColumn
+highlight link SyntasticStyleWarningSign SignColumn
 
 " vim-javasrcipt setting
 "----------------------------------
@@ -118,13 +94,13 @@ let g:jsx_ext_required=0
 
 "powerline setting
 "set rtp+=/usr/local/lib/python2.7/dist-packages/powerline/bindings/vim
-let g:python_host_prog = '/Library/Python/2.7'
-set rtp+=/Library/Python/2.7/site-packages/powerline/bindings/vim
+"let g:python_host_prog = '/Library/Python/2.7'
+"set rtp+=/Library/Python/2.7/site-packages/powerline/bindings/vim
 
 
  "These lines setup the environment to show graphics and colors correctly.
-"set nocompatible
-"set t_Co=256
+set nocompatible
+set t_Co=256
  
 "let g:minBufExplForceSyntaxEnable = 1
 "python from powerline.vim import setup as powerline_setup
@@ -140,13 +116,13 @@ set rtp+=/Library/Python/2.7/site-packages/powerline/bindings/vim
    "augroup END
 "endif
  
-set laststatus=2 " Always display the statusline in all windows
-set guifont=Inconsolata\ for\ Powerline:h14
-set noshowmode " Hide the default mode text (e.g. -- INSERT -- below the statusline)
+"set laststatus=2 " Always display the statusline in all windows
+"set guifont=Inconsolata\ for\ Powerline:h14
+"set noshowmode " Hide the default mode text (e.g. -- INSERT -- below the statusline)
 
 " airline setting
 " ---------------------------------
-"let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#enabled = 1
 "let g:airline_detect_modified=1
 "let g:airline_theme='badwolf'
 
@@ -154,29 +130,10 @@ set noshowmode " Hide the default mode text (e.g. -- INSERT -- below the statusl
 "----------------------------------
 set background=light
 colorscheme solarized
-"colorscheme hybrid_material
 
 " NERDTree setting
 "----------------------------------
 map <C-n> :NERDTreeToggle<CR>
-let NERDChristmasTree=0
-let NERDTreeWinSize=35
-let NERDTreeChDirMode=2
-let NERDTreeIgnore=['\~$', '\.pyc$', '\.swp$']
-let NERDTreeShowBookmarks=1
-let NERDTreeWinPos="left"
-let g:nerdtree_tabs_open_on_gui_startup=1
-let g:nerdtree_tabs_open_on_console_startup=1
-
-autocmd vimenter * if !argc() | NERDTree | endif
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-
-" ctrlp setting 
-" ------------------------------------
-set runtimepath^=~/.vim/bundle/ctrlp.vim  " start
-" 当尝试打开一个文件时，如果它已经在某个窗口被打开，CtrlP会尝试跳到那个窗口，而不是新打开一个实例
-let g:ctrlp_switch_buffer = 'Et'          
-
 map <c-m> :call JsBeautify()<cr>
 map <c-g> :call HtmlBeautify()<cr>
 
@@ -203,10 +160,9 @@ au! BufNewFile,BufRead *.t2t set ft=txt2tags
 au! BufRead,BufNewFile *.sah set filetype=javascript
 
 autocmd! bufwritepost .vimrc source ~/.vimrc
-"autocmd! BufWritePost * call system("ctags -R")
 
-"let Tlist_Ctags_Cmd = "/usr/local/bin/ctags"
-"set tags=~/tags
+let Tlist_Ctags_Cmd = "/usr/local/bin/ctags"
+set tags=~/tags
 "定义快捷键的前缀，即<Leader>
 let mapleader=","
 "call pathogen#runtime_append_all_bundles()

@@ -1,0 +1,10 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =8
+let g:netrw_dirhist_1='/Users/liudong/workspace/fie-toolkit-fed/template/root/src/actions'
+let g:netrw_dirhist_2='/Users/liudong/workspace/fie-toolkit-ipaas/build'
+let g:netrw_dirhist_3='/Users/liudong/workspace/paas-web/app/views/admin'
+let g:netrw_dirhist_4='/Users/liudong/workspace/fie-toolkit-ipaas/template/root/static-pages'
+let g:netrw_dirhist_5='/Users/liudong/workspace/ratingcenter/build'
+let g:netrw_dirhist_6='/Users/liudong/workspace/fie-toolkit-ipaas/template/root/static-pages'
+let g:netrw_dirhist_7='/Users/liudong/workspace/fie-toolkit-ipaas/template/root/console/containers/app'
+let g:netrw_dirhist_8='/Users/liudong/workspace/fie-toolkit-ipaas/template/root/console/constants/aslide'
